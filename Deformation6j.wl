@@ -910,13 +910,14 @@ ColoringMinusQ[coloring_]:=(coloring[[1]]==1)&&(coloring[[3]]-coloring[[2]]==1)&
 (*The functio below caches the simplified \[Omega]*)
 Subscript[(\[Omega]k[q_,t_,k_]), i1_,i2_,i3_,i4_,i5_,i6_]:=Subscript[(\[Omega]k[q,t,k]), i1,i2,i3,i4,i5,i6]=SimplifyF[\[CapitalOmega]k[{i1,i2,i3,i4,i5,i6},q,t,k]];
 
-ORecursivePow[pow_,j_,q_,t_,k_]:=ORecursivePow[pow,j,q,t,k]=Switch[pow,
+(*Using explicit formulas (41),(42) for \[CapitalOmega]p and \[CapitalOmega]m as initial conditions for recursion*)
+ORecursivePow[pow_,j_,q_,t_,k_,OM_]:=ORecursivePow[pow,j,q,t,k,OM]=Switch[pow,
 0,
 	Return[IdentityMatrix[Length[Subscript[basis, k]]]],
 1,
-	ORecursive[j,q,t,k],
+	ORecursiveGeneral[j,q,t,k,OM],
 _?(#>1&),
-	Return[ORecursivePow[pow-1,j,q,t,k].ORecursive[j,q,t,k]],
+	Return[ORecursivePow[pow-1,j,q,t,k,OM].ORecursiveGeneral[j,q,t,k,OM]],
 _,
 	Print["Unexpected power, ",pow];
 	Return[Indeterminate];
@@ -925,13 +926,14 @@ _,
 O1M[q_,t_,k_]:=GetMatrix[Subscript[O1F,1][##,q,t,k,\[Omega]k[q,t,k]]&,k];
 O3M[q_,t_,k_]:=GetMatrix[Subscript[O3F,1][##,q,t,k,\[Omega]k[q,t,k]]&,k];
 
-ORecursiveGeneral[j_,q_,t_,k_,O1M_]:=ORecursive[j,q,t,k]=Module[
+(*Calculating higher knot operators using (66)*)
+ORecursiveGeneral[j_,q_,t_,k_,OM_]:=ORecursiveGeneral[j,q,t,k,OM]=Module[
 	{ans,i,m,p}
 ,
 	ans=Table[0,{i1,1,Length[Subscript[basis, k]]},{i2,1,Length[Subscript[basis, k]]}];
 	Switch[j,
 	1,
-		Return[O1M[q,t,k]],
+		Return[OM[q,t,k]],
 	_,
 		Print["Entering j=",j," q=",q," t=",t," k=",k];
 		Qn[n_]:=(q^(n/2)-q^(-n/2))/(q^(1/2)-q^(-1/2));
@@ -946,7 +948,7 @@ ORecursiveGeneral[j_,q_,t_,k_,O1M_]:=ORecursive[j,q,t,k]=Module[
 \*FractionBox[\(Qn[j - l + 1 + m] QQn[m - 1, 1]\), \(Qn[m + 1] QQn[j - 1 - m, 1]\)])\))\) \(
 \*UnderoverscriptBox[\(\[Sum]\), \(p = 0\), \(Floor[j/2] - l\)]\((
 \*FractionBox[\(
-\*SuperscriptBox[\((\(-1\))\), \(p\)]\ Factorial[j - 2  l - p]\), \(Factorial[p] Factorial[j - 2  l - 2  p]\)] ORecursivePow[j - 2  l - 2  p, 1, q, t, k])\)\))\)\);
+\*SuperscriptBox[\((\(-1\))\), \(p\)]\ Factorial[j - 2  l - p]\), \(Factorial[p] Factorial[j - 2  l - 2  p]\)] ORecursivePow[j - 2  l - 2  p, 1, q, t, k, OM])\)\))\)\);
 		Return[ans];
 	];
 ];
