@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     15504,        332]
-NotebookOptionsPosition[     14870,        313]
-NotebookOutlinePosition[     15233,        329]
-CellTagsIndexPosition[     15190,        326]
+NotebookDataLength[     16929,        361]
+NotebookOptionsPosition[     16254,        342]
+NotebookOutlinePosition[     16658,        358]
+CellTagsIndexPosition[     16615,        355]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -21,20 +21,48 @@ Notebook[{
 Cell[BoxData[
  RowBox[{
   RowBox[{"(*", 
-   RowBox[{"Packages", " ", "definition"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"Packages", " ", "definition"}], "*)"}], "\n", 
   RowBox[{
    RowBox[{
-    RowBox[{"AddPackageDirectory", "[", 
-     RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+    RowBox[{"interfacemode", "=", "\"\<Generic\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"AddPackageDirectory", "[", "SPack_", "]"}], ":=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Position", "[", 
+         RowBox[{"$Path", ",", "SPack"}], "]"}], "==", 
+        RowBox[{"{", "}"}]}], ",", "\n", "\t", 
+       RowBox[{
+        RowBox[{"$Path", "=", 
+         RowBox[{"Append", "[", 
+          RowBox[{"$Path", ",", "SPack"}], "]"}]}], ";"}]}], "\n", "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Switch", "[", 
+     RowBox[{
+     "interfacemode", ",", "\[IndentingNewLine]", "\"\<Generic\>\"", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"AddPackageDirectory", "[", 
+       RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ",", 
+      "\[IndentingNewLine]", "\"\<Custom\>\"", ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"AddPackageDirectory", "[", 
+        RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+       "AddPackageDirectory", "[", "\"\<d:\\\\CUSTOM-PACKAGES-DIRECOTRY\>\"", 
+        "]"}]}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"ClearAll", "[", "Subscript", "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"<<", "HigherRuijsenaars`"}], "\[IndentingNewLine]", 
    RowBox[{"<<", "Deformation6j`"}]}]}]], "Input",
  CellChangeTimes->{{3.780776829570696*^9, 3.7807768318216763`*^9}, {
-  3.7807770030924916`*^9, 
-  3.780777019264747*^9}},ExpressionUUID->"e2a8c371-3c6c-42f8-89cd-\
-9031e15248e7"],
+  3.7807770030924916`*^9, 3.780777019264747*^9}, {3.892982498719331*^9, 
+  3.892982627102586*^9}, {3.892982687991007*^9, 3.8929827257429433`*^9}, {
+  3.8929829393532286`*^9, 3.892982947460272*^9}},
+ CellLabel->"In[20]:=",ExpressionUUID->"e2a8c371-3c6c-42f8-89cd-9031e15248e7"],
 
 Cell[BoxData[
  RowBox[{
@@ -119,8 +147,7 @@ Cell[BoxData[
    3.7798432340714493`*^9}, {3.7798434113328495`*^9, 
    3.7798434123686523`*^9}, {3.779843450937248*^9, 3.7798434512554383`*^9}, {
    3.780776849589075*^9, 3.7807768926858788`*^9}},
- CellLabel->
-  "In[1712]:=",ExpressionUUID->"0dc24fad-69b5-4dba-a2d2-a217dab68286"],
+ CellLabel->"In[26]:=",ExpressionUUID->"0dc24fad-69b5-4dba-a2d2-a217dab68286"],
 
 Cell[CellGroupData[{
 
@@ -145,8 +172,7 @@ Cell[BoxData[
      SubscriptBox["b", 
       RowBox[{"1", ",", "2"}]], "]"}]}]}], "]"}]], "Input",
  CellChangeTimes->{{3.7807768952527156`*^9, 3.7807769724307137`*^9}},
- CellLabel->
-  "In[1721]:=",ExpressionUUID->"75169816-b003-439e-90f5-3f0c16a13412"],
+ CellLabel->"In[31]:=",ExpressionUUID->"75169816-b003-439e-90f5-3f0c16a13412"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -154,18 +180,19 @@ Cell[BoxData[
    TagBox["SparseArray",
     "SummaryHead"], "[", 
    DynamicModuleBox[{Typeset`open$$ = False, Typeset`embedState$$ = "Ready"}, 
-    TemplateBox[{PaneSelectorBox[{False -> GridBox[{{
+    TemplateBox[{
+      PaneSelectorBox[{False -> GridBox[{{
             PaneBox[
              ButtonBox[
               DynamicBox[
-               FEPrivate`FrontEndResource[
-               "FEBitmaps", "SquarePlusIconMedium"]], 
+               FEPrivate`FrontEndResource["FEBitmaps", "SummaryBoxOpener"]], 
               ButtonFunction :> (Typeset`open$$ = True), Appearance -> None, 
-              Evaluator -> Automatic, Method -> "Preemptive"], 
-             Alignment -> {Center, Center}, ImageSize -> 
+              BaseStyle -> {}, Evaluator -> Automatic, Method -> 
+              "Preemptive"], Alignment -> {Center, Center}, ImageSize -> 
              Dynamic[{
-               Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                AbsoluteCurrentValue[Magnification]}]], 
+               Automatic, 
+                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                 Magnification])}]], 
             GraphicsBox[
              RasterBox[CompressedData["
 1:eJztyKEJhVAAQNEHruACuoJB+OXNoAMYhJ+N7iI/Gc02dzC5gUWcwPgRzE5w
@@ -181,11 +208,12 @@ Oeecc84555zzd/8Dmd7PtQ==
              Directive[
                GrayLevel[0.5, 0.4]], ImageSize -> 
              Dynamic[{
-               Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                AbsoluteCurrentValue[Magnification]}], 
-             Method -> {
-              "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
                Automatic, 
+                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                 Magnification])}], 
+             Method -> {
+              "GridLinesInFront" -> True, "AxisPadding" -> Scaled[0.02], 
+               "DefaultBoundaryStyle" -> Automatic, 
                "DefaultGraphicsInteraction" -> {
                 "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
                  "Effects" -> {
@@ -215,21 +243,22 @@ Oeecc84555zzd/8Dmd7PtQ==
               BaseStyle -> {
               ShowStringCharacters -> False, NumberMarks -> False, 
                PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
-          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+          GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Top}}}, 
+          AutoDelete -> False, 
           GridBoxItemSize -> {
            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
           BaselinePosition -> {1, 1}], True -> GridBox[{{
             PaneBox[
              ButtonBox[
               DynamicBox[
-               FEPrivate`FrontEndResource[
-               "FEBitmaps", "SquareMinusIconMedium"]], 
+               FEPrivate`FrontEndResource["FEBitmaps", "SummaryBoxCloser"]], 
               ButtonFunction :> (Typeset`open$$ = False), Appearance -> None, 
-              Evaluator -> Automatic, Method -> "Preemptive"], 
-             Alignment -> {Center, Center}, ImageSize -> 
+              BaseStyle -> {}, Evaluator -> Automatic, Method -> 
+              "Preemptive"], Alignment -> {Center, Center}, ImageSize -> 
              Dynamic[{
-               Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                AbsoluteCurrentValue[Magnification]}]], 
+               Automatic, 
+                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                 Magnification])}]], 
             GraphicsBox[
              RasterBox[CompressedData["
 1:eJztyKEJhVAAQNEHruACuoJB+OXNoAMYhJ+N7iI/Gc02dzC5gUWcwPgRzE5w
@@ -245,11 +274,12 @@ Oeecc84555zzd/8Dmd7PtQ==
              Directive[
                GrayLevel[0.5, 0.4]], ImageSize -> 
              Dynamic[{
-               Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                AbsoluteCurrentValue[Magnification]}], 
-             Method -> {
-              "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
                Automatic, 
+                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                 Magnification])}], 
+             Method -> {
+              "GridLinesInFront" -> True, "AxisPadding" -> Scaled[0.02], 
+               "DefaultBoundaryStyle" -> Automatic, 
                "DefaultGraphicsInteraction" -> {
                 "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
                  "Effects" -> {
@@ -291,7 +321,8 @@ Oeecc84555zzd/8Dmd7PtQ==
               BaseStyle -> {
               ShowStringCharacters -> False, NumberMarks -> False, 
                PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
-          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+          GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Top}}}, 
+          AutoDelete -> False, 
           GridBoxItemSize -> {
            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
           BaselinePosition -> {1, 1}]}, 
@@ -305,17 +336,15 @@ Oeecc84555zzd/8Dmd7PtQ==
   Editable->False,
   SelectWithContents->True,
   Selectable->False]], "Output",
- CellChangeTimes->{
-  3.780776898014575*^9, {3.78077692827644*^9, 3.780776972812242*^9}},
- CellLabel->
-  "Out[1721]=",ExpressionUUID->"86722b5b-2add-4258-bbb7-9975a2e1d040"]
+ CellChangeTimes->{3.8929829207852488`*^9, 3.8929829528965416`*^9},
+ CellLabel->"Out[31]=",ExpressionUUID->"b9bc0f96-efb7-462d-8a4e-875fda5322ff"]
 }, Open  ]]
 },
-Evaluator->"Local B",
-WindowSize->{963, 944},
-WindowMargins->{{Automatic, 0}, {12, Automatic}},
-FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
-StyleDefinitions->"Default.nb"
+WindowSize->{963., 770.25},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+FrontEndVersion->"13.2 pour Microsoft Windows (64-bit) (January 30, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"858f2f70-9231-44a0-9ffd-2ad7fd4a21c0"
 ]
 (* End of Notebook Content *)
 
@@ -328,11 +357,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 655, 16, 105, "Input",ExpressionUUID->"e2a8c371-3c6c-42f8-89cd-9031e15248e7"],
-Cell[1216, 38, 5277, 84, 124, "Input",ExpressionUUID->"0dc24fad-69b5-4dba-a2d2-a217dab68286"],
+Cell[558, 20, 1870, 44, 227, "Input",ExpressionUUID->"e2a8c371-3c6c-42f8-89cd-9031e15248e7"],
+Cell[2431, 66, 5272, 83, 93, "Input",ExpressionUUID->"0dc24fad-69b5-4dba-a2d2-a217dab68286"],
 Cell[CellGroupData[{
-Cell[6518, 126, 744, 22, 31, "Input",ExpressionUUID->"75169816-b003-439e-90f5-3f0c16a13412"],
-Cell[7265, 150, 7589, 160, 71, "Output",ExpressionUUID->"86722b5b-2add-4258-bbb7-9975a2e1d040"]
+Cell[7728, 153, 739, 21, 23, "Input",ExpressionUUID->"75169816-b003-439e-90f5-3f0c16a13412"],
+Cell[8470, 176, 7768, 163, 49, "Output",ExpressionUUID->"b9bc0f96-efb7-462d-8a4e-875fda5322ff"]
 }, Open  ]]
 }
 ]

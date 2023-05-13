@@ -3,13 +3,13 @@
 BeginPackage["Deformation6j`"]
 
 Needs["CommonDefinitions`"]
-Needs["SymbolicQ`"]
+(*Needs["SymbolicQ`"]
 Needs["Decomposition`"]
-(*Needs["DetermineKnots`"]*)
+Needs["DetermineKnots`"]*)
 
 Begin["`FileNames`"]
 
-directory="d:\\Documents\\Rutgers\\Shamil\\6j convolution deformation\\";
+directory="d:\\Math\\GitHubExamples\\Refined CS in Genus Two\\2023-04-25\\";
 
 FourierData[k_,jMax_,\[CapitalLambda]q_,precision_]:=FileNameJoin[{directory,"FourierData","run k="<>ToString[k]<>" MaxJ="<>ToString[jMax]<>" abs="<>ToString[\[CapitalLambda]q]<>" prec="<>ToString[Round[precision]]<>".txt"}];
 
@@ -423,7 +423,7 @@ Solve6j[k_,q_,t_]:=Module[
 		Print["Failure in LinSolve"];
 		Return[Indeterminate];
 	];
-	If[NumberQ[A[[1,1]]],Print["Relative Error = ",AbsNorm[A.sol-b]/AbsNorm[b]," Abs Norms ",{AbsNorm[A.sol-b],AbsNorm[b]}]];
+	If[NumberQ[A[[1,1]]],Print["Relative Error = ",AbsNorm[A . sol-b]/AbsNorm[b]," Abs Norms ",{AbsNorm[A . sol-b],AbsNorm[b]}]];
 	Return[sol];
 ];
 
@@ -917,7 +917,7 @@ ORecursivePow[pow_,j_,q_,t_,k_,OM_]:=ORecursivePow[pow,j,q,t,k,OM]=Switch[pow,
 1,
 	ORecursiveGeneral[j,q,t,k,OM],
 _?(#>1&),
-	Return[ORecursivePow[pow-1,j,q,t,k,OM].ORecursiveGeneral[j,q,t,k,OM]],
+	Return[ORecursivePow[pow-1,j,q,t,k,OM] . ORecursiveGeneral[j,q,t,k,OM]],
 _,
 	Print["Unexpected power, ",pow];
 	Return[Indeterminate];
@@ -1013,7 +1013,7 @@ EvaluationMap[word0_,abo_,q_,t_,k_]:=Module[
 	AppendTo[evaluationsubs,Inv->Inverse];
 	(*Print[evaluationsubs];*)
 	EvaluationF[expr_]:=If[expr===1,IdentityMatrix[Length[ABO[[1,1]]]],expr/.evaluationsubs];
-	matr=Subscript[A, 1].Subscript[B, 1].Subscript[A, 2].Subscript[B, 2].Subscript[A, 3].EvaluationF[word];
+	matr=Subscript[A, 1] . Subscript[B, 1] . Subscript[A, 2] . Subscript[B, 2] . Subscript[A, 3] . EvaluationF[word];
 	If[debug,Print["Matrix Constructed"]];
 	ans=SimplifyF[matr[[1,1]]];
 	If[debug,Print["Matrix element simplified"]];
